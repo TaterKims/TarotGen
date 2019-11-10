@@ -1,0 +1,6 @@
+__pycache__/
+.vscode/
+t.json
+
+image_get.py
+TarotGen.log
