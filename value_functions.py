@@ -7,7 +7,7 @@ import datetime
 def random_value():
     ''' Returns an int between 1 to 78 for card value '''
     
-    return random.randint(0, 78)
+    return random.randint(0, 77)
 
 def date():
     ''' Returns current date as yyyy-mm-dd '''
@@ -52,3 +52,5 @@ def compare_previous(value):
             result = False
     
     return result
+
+print(compare_previous(58))
