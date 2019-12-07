@@ -19,25 +19,20 @@ api = tweepy.API(auth)
 print("Authorized!")
 print("~~ Streamer engaged! ~~")
 
-def form_status(value):
-    ''' Will form a status to post and return it '''
+def post_status(value, user):
+    ''' Take input value and post status '''
     
     card = chandle.get_name(value)
     description = chandle.get_description(value)
     
-    status = f'''{card} ~ {description}'''
-    
-    return status
-
-def post_status(value):
-    ''' Take input value and post status '''
+    s = f"@{user} {card} - {description}"
     
     media = chandle.get_image(value) # Find the card's image
-    s = form_status(value) # Create the status for card
     
     api.update_with_media(media, status=s) # Post to twitter
     
     return
+
 # The bot needs to watch for mentions and then parse the text for commands
 # Bot will then call on relevant value_functions and card_handler stuff and reply
 # Perhaps look in to asyc/await
@@ -46,13 +41,13 @@ class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
         
         print('Mention seen on {} at {}'.format(vf.date(), vf.time()))
-        print(f'"{status.text}"')
+        print(f'From: {status.user.screen_name} - "{status.text}"')
         
         if 'random card' in status.text:
             
             card_num = vf.random_value()
             try:
-                print(post_status(card_num))
+                print(post_status(card_num, status.user.screen_name))
             except:
                 print("Error occurred: sys.exc_info()[0]")
                 pass
@@ -60,4 +55,4 @@ class MyStreamListener(tweepy.StreamListener):
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(track = ['@PoastThe', '@poastthe'])
+myStream.filter(track = ['@PoastThe', '@poastthe'], is_async=True)
