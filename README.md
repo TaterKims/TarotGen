@@ -19,12 +19,12 @@ Format for reversal is "rX" where X is the card number.
 - [x] Create function to log previous picks.
 - [x] Create function to match generated choice to previous choices.
 - [x] Create function to match generate value to a card.
-- [] Set up JSON file for cards: 
+- [ ] Set up JSON file for cards: 
 - [x] JSON Value : Name
 - [x] JSON Value : Image path
 - [x] JSON Value : Upright Description
-- [] JSON Value : Reversal description
-- [] JSON Value : Keyword
+- [ ] JSON Value : Reversal description
+- [ ] JSON Value : Keyword
 - [x] Set up Logging
 - [x] Set up random card choice
 - [x] Set up a system for finding relevant card items:
